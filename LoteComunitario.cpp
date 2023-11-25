@@ -37,8 +37,8 @@ double LoteComunitario::getImporte (const Fecha& fecha) const {
 
 double LoteComunitario::getPrecioBase(){return precioBase;}
 
-void LoteComunitario::agregarReserva(Fecha& fecha, const int inicio, const int fin, double precioReserva){
-	Reserva* nuevaReserva = new Reserva(fecha, inicio, fin, precioReserva, this);
+void LoteComunitario::agregarReserva(Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona){
+	Reserva* nuevaReserva = new Reserva(fecha, inicio, fin, precioReserva, this, persona);
 	reservas.push_back(nuevaReserva);
 }
 

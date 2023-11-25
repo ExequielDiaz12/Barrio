@@ -27,7 +27,7 @@ public:
 
 	string getNombreLote();
 	double getPrecioBase();
-	void agregarReserva( Fecha& fecha, const int inicio, const int fin, double precioReserva);
+	void agregarReserva( Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona);
 	const vector<Reserva*>& getReservas() const;
 };
 

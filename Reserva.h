@@ -10,6 +10,7 @@
 #include "Fecha.h"
 
 class LoteComunitario;
+class Persona;
 
 class Reserva {
 private:
@@ -18,13 +19,15 @@ private:
 	int horaFin;
 	double precio;
 	LoteComunitario* lote;
+	Persona* persona;
 public:
-	Reserva(Fecha& fecha, int horaInicio, int horaFin, double precio, LoteComunitario* lote);
+	Reserva(Fecha& fecha, int horaInicio, int horaFin, double precio, LoteComunitario* lote, Persona* persona);
 	virtual ~Reserva();
 
 	double getPrecio() const;
 	Fecha getFecha() const;
 	LoteComunitario* getLoteComunitario() const;
+	Persona* getPersona() const;
 };
 
 #endif /* RESERVA_H_ */

@@ -30,7 +30,7 @@ int main() {
 
 	cout<< "con el segundo Importe" << LC1.getImporte(f1)<<endl;
 
-	LC1.agregarReserva(f1, 14, 20, 10000);
+
 
 
 
