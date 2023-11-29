@@ -12,6 +12,8 @@ using namespace std;
 #include "LoteComunitario.h"
 #include "Fecha.h"
 #include "Consumo.h"
+#include "Persona.h"
+#include "Reserva.h"
 
 int main() {
 	Fecha f1;
@@ -23,12 +25,10 @@ int main() {
 	cout<< "nro lote:"<<LC1.getNumero()<<endl;
 	cout<< "Area: "<<LC1.getArea()<<endl;
 	cout<< "Precio base del lote Comuitario: "<<LC1.getPrecioBase()<<endl;
-
 	cout<< "Primer Importe" << LC1.getImporte(f1)<<endl;
-
 	LC1.agregarConsumo(200, f1);
-
 	cout<< "con el segundo Importe" << LC1.getImporte(f1)<<endl;
+
 
 
 

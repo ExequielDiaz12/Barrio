@@ -9,10 +9,13 @@
 
 int Lote::lotesCreados = 0;
 
-Lote::Lote(double area) : numero(lotesCreados++), area(area) {}
+Lote::Lote(double area) : numero(lotesCreados++), area(area) {
 
+}
+/*
 Lote::Lote(double area, const vector<Consumo*>& consumos):
 	numero(++lotesCreados),area(area),consumos(consumos){}
+*/
 
 Lote::~Lote() {
 	for(Consumo* consumo : consumos){

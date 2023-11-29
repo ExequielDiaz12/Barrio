@@ -20,14 +20,14 @@ protected:
 	double area;
 	vector<Consumo*> consumos;
 public:
-	Lote(double area);
-	Lote(double area, const vector<Consumo*>& consumos);
+	Lote(double area);//aqui creo el array de consumo
+	//Lote(double area, const vector<Consumo*>& consumos);//borro
 	virtual ~Lote();
 
 	int getNumero()const;
 	double getArea()const;
-	virtual double getImporte(const Fecha& fecha) const = 0;
-
+	virtual double getImporte(const Fecha& fecha) const = 0;// no la hago abstracta y la implementacion la hago aca
+	//agregar getipo abstracto // esto consideraciones del informe
 	void agregarConsumo(double importe, const Fecha& fecha);
 };
 

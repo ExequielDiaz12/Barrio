@@ -24,7 +24,7 @@ public:
 	LoteComunitario(string nombreLote,double area, double precioBase);
 	virtual ~LoteComunitario();
 	double getImporte(const Fecha& fecha) const override;
-
+	//falta calcular recaudacion y comprobar que este reservado
 	string getNombreLote();
 	double getPrecioBase();
 	void agregarReserva( Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona);

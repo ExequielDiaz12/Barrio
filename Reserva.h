@@ -19,7 +19,7 @@ private:
 	int horaFin;
 	double precio;
 	LoteComunitario* lote;
-	Persona* persona;
+	Persona* persona; // aqui solo va la referencia de la persona pero la persona no tiene informacion de ella
 public:
 	Reserva(Fecha& fecha, int horaInicio, int horaFin, double precio, LoteComunitario* lote, Persona* persona);
 	virtual ~Reserva();
