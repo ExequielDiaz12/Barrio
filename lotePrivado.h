@@ -28,6 +28,7 @@ public:
 	Persona* getPropietario() const;
 	void agregarExpensa(const Expensa& expensa);
 	const vector<Expensa>& getExpensas()const;
+	string getTipo() const override;
 };
 
 #endif /* LOTEPRIVADO_H_ */

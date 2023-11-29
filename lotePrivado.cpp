@@ -31,3 +31,5 @@ void lotePrivado::agregarExpensa(const Expensa& expensa) {
 const std::vector<Expensa>& lotePrivado::getExpensas() const {
     return expensas;
 }
+
+string lotePrivado::getTipo() const{return "Privado";}
