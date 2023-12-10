@@ -10,48 +10,44 @@
 using namespace std;
 #include "Lote.h"
 #include "LoteComunitario.h"
+#include "lotePrivado.h"
 #include "Fecha.h"
 #include "Consumo.h"
 #include "Persona.h"
 #include "Reserva.h"
+#include "Administracion.h"
 
 int main() {
-	/*Genero fechas*/
-	Fecha f1(1,11,2023);
-	Fecha f2(1,10,2023);
-	Fecha f3(1,12,2023);
-	Fecha fechaHoy;
+	// Crear una instancia de Administracion
+	    Administracion administracion("Barrio XYZ");
 
-	/***Creo lotes comunitarios***/
-	LoteComunitario LoteCom1("piscina",1500.00, 3000);
-	LoteComunitario LoteCom2("Teatro",2000.00, 5000);
+	    // Crear un lote comunitario
+	    LoteComunitario* loteComunitario = new LoteComunitario("Área de recreación", 500.0, 100.0);
+	    administracion.agregarLoteComunitario("Área de recreación", 500.0, 100.0);
 
+	    // Crear un lote privado
+	    lotePrivado* lotePrivado = new lotePrivado(300.0, false, nullptr);
+	    administracion.agregarLotePrivado(300.0, false, nullptr);
 
-	LoteCom1.agregarConsumo(500.50, f1);
-	LoteCom1.agregarConsumo(300, f1);
-	cout<< "importe de consumo de loteCom1: $"<<LoteCom1.getImporte(f1)<<endl;
+	    // Crear una persona
+	    Persona persona("123456789", "Juan Perez");
 
-	LoteCom2.agregarConsumo(1500.50, f2);
-	LoteCom2.agregarConsumo(300.50, f2);
-	cout<< "importe de consumo de loteCom2: $"<<LoteCom2.getImporte(f2)<<endl;
+	    // Vender el lote privado a la persona
+	   // administracion.venderLotePrivado(persona, lotePrivado);
 
-	/** Creo las Personas**/
-	Persona p1("123","William Blake");
-	Persona p2("456","Emmy Noether");
-	Persona p3("789","Edmond Kirsch");
+	    // Agregar una reserva al lote comunitario
+	    Fecha fechaReserva(2023, 12, 15);
+	    //loteComunitario->agregarReserva(fechaReserva, 14, 16, 50.0);
 
-	/**creo las reservas**/
-	LoteCom1.agregarReserva(f2, 12, 20, 2000, &p1);
-	LoteCom1.agregarReserva(f2, 12, 20, 2000, &p3);//esta resrva no se hace
-	LoteCom1.agregarReserva(f3, 12, 20, 2000, &p2);
-	LoteCom2.agregarReserva(f2, 12, 20, 2000, &p3);
+	    // Calcular la expensa privada para un mes
+	    Fecha fechaExpensa(2023, 12, 1);
+	    double expensaPrivada = administracion.calcularExpensaPrivada(fechaExpensa);
 
-	cout<<"Recaudacion de LoteCom1 en la fecha dada es de $"<<LoteCom1.calcularRecaudacion(f2)<<endl;
+	    // Mostrar el resultado
+	    cout << "Expensa privada para diciembre de 2023: $" << expensaPrivada << endl;
 
-
-	/* Lotes Privados */
-
-	/* genero las e*/
-
+	    // Liberar la memoria (puedes hacerlo al final del programa)
+	    delete loteComunitario;
+	    delete lotePrivado;
 	return 0;
 }

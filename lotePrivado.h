@@ -14,6 +14,7 @@ using namespace std;
 #include "Reserva.h"
 #include <vector>
 #include "Expensa.h"
+#include "Persona.h"
 
 class lotePrivado : public Lote{
 private:

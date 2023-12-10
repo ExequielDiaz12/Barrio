@@ -28,12 +28,10 @@ void Administracion::agregarLoteComunitario(string nombreLote,double area, doubl
 	lotesComunitarios.push_back(nuevo);
 }
 
-
 void Administracion::agregarContratacion(string empresa,Fecha &fecha,float costo,string tipoServicio){
 	 Contratacion* contratacion = new Contratacion(empresa, fecha, costo, tipoServicio);
 	 contrataciones.push_back(contratacion);
 }
-
 
 double Administracion::calcularAreaTotalPrivado(){
     double totalArea = 0.0;
@@ -76,8 +74,6 @@ double Administracion::calcularConsumoComunitario(Fecha& fecha) {
     return total;
 }
 
-// En la clase Administracion
-
 double Administracion::calcularTotalReservas( Fecha& fecha) {
     double total = 0.0;
 
@@ -95,8 +91,6 @@ double Administracion::calcularTotalReservas( Fecha& fecha) {
     return total;
 }
 
-// En la clase Administracion
-
 double Administracion::recaudacion( Fecha& fecha)  {
     double totalRecaudado = 0.0;
 
@@ -113,7 +107,6 @@ double Administracion::recaudacion( Fecha& fecha)  {
 
     return totalRecaudado;
 }
-
 
 double Administracion::calcularExpensaPrivada( Fecha& fecha) {
     double consumoComunitario = calcularConsumoComunitario(fecha);
