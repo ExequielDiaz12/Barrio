@@ -29,6 +29,7 @@ public:
 	void agregarExpensa(const Expensa& expensa);
 	const vector<Expensa>& getExpensas()const;
 	string getTipo() const override;
+	double getImporte(const Fecha& fecha) const override;
 };
 
 #endif /* LOTEPRIVADO_H_ */

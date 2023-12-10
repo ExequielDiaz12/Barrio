@@ -7,7 +7,8 @@
 
 #include "lotePrivado.h"
 
-lotePrivado::lotePrivado(double area, bool vendido, Persona* propietario) : Lote(area), vendido(vendido), propietario(propietario) {
+lotePrivado::lotePrivado(double area, bool vendido, Persona* propietario)
+: Lote(area), vendido(vendido), propietario(propietario) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -33,3 +34,8 @@ const std::vector<Expensa>& lotePrivado::getExpensas() const {
 }
 
 string lotePrivado::getTipo() const{return "Privado";}
+
+double lotePrivado::getImporte(const Fecha& fecha) const {
+    // Implementa el cálculo del importe según tus necesidades
+    return 0.0;
+}
