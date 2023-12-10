@@ -19,6 +19,7 @@ private:
 	string dni;
 	string nombre;
 	vector<lotePrivado*> lotes;
+	//falta el lote en el que habita y una funcion para agregar este puntero
 public:
 	Persona(string dni, string nombre);
 	virtual ~Persona();
