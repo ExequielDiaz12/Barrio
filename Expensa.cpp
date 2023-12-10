@@ -69,6 +69,7 @@ Expensa::~Expensa() {
 	// TODO Auto-generated destructor stub
 }
 
+bool Expensa::getPagado(){return pagado;}
 
 
 

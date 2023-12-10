@@ -31,6 +31,7 @@ public:
 	Fecha getFecha();
 	void emitirFactura();
 	virtual ~Expensa();
+	bool getPagado();
 
 };
 
