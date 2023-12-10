@@ -24,7 +24,6 @@ private:
 public:
 	LoteComunitario(string nombreLote,double area, double precioBase);
 	virtual ~LoteComunitario();
-	double getImporte(const Fecha& fecha) const override;
 	string getTipo() const override;
 	string getNombreLote();
 	double getPrecioBase();
