@@ -27,6 +27,7 @@ public:
             double costoServicio, double consumoElectrico, double consumoElectricoComunitario,
             double interesesGenerados, double bonificacion);
 	virtual ~Expensa();
+	Fecha getFecha();
 };
 
 #endif /* EXPENSA_H_ */

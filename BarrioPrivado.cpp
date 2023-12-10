@@ -51,5 +51,7 @@ int main() {
 
 	/* Lotes Privados */
 
+	/* genero las e*/
+
 	return 0;
 }

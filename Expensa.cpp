@@ -23,3 +23,5 @@ Expensa::~Expensa() {
 	// TODO Auto-generated destructor stub
 }
 
+Fecha Expensa::getFecha(){return fecha;}
+
