@@ -64,7 +64,7 @@ bool LoteComunitario::estaReservado( Fecha& fecha){
 	return true;
 }
 
-void LoteComunitario::agregarReserva(Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona){
+void LoteComunitario::agregarReserva(Fecha& fecha,  int inicio,  int fin, double precioReserva, Persona* persona){
 	if(estaReservado(fecha))
 	{
 		Reserva* nuevaReserva = new Reserva(fecha, inicio, fin, precioReserva, this, persona);

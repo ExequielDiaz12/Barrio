@@ -28,6 +28,7 @@ public:
             double interesesGenerados, double bonificacion);
 	virtual ~Expensa();
 	Fecha getFecha();
+	void Pagar();
 };
 
 #endif /* EXPENSA_H_ */

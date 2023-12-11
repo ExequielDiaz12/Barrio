@@ -25,3 +25,6 @@ Expensa::~Expensa() {
 
 Fecha Expensa::getFecha(){return fecha;}
 
+void Expensa::Pagar() {
+    pagado = true;
+}

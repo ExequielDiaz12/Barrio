@@ -14,7 +14,6 @@ using namespace std;
 #include "Reserva.h"
 #include <vector>
 #include "Expensa.h"
-#include "Persona.h"
 
 class lotePrivado : public Lote{
 private:
@@ -31,6 +30,9 @@ public:
 	const vector<Expensa>& getExpensas()const;
 	string getTipo() const override;
 	double getImporte(const Fecha& fecha) const override;
+	void setVendido(bool vendido);
+	void setPropietario(Persona* propietario);
+	void PagarExpensa( Fecha& fechaExpensa);
 };
 
 #endif /* LOTEPRIVADO_H_ */

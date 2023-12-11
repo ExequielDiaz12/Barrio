@@ -6,6 +6,7 @@
  */
 
 #include "lotePrivado.h"
+#include "Persona.h"
 
 lotePrivado::lotePrivado(double area, bool vendido, Persona* propietario)
 : Lote(area), vendido(vendido), propietario(propietario) {
@@ -36,6 +37,31 @@ const std::vector<Expensa>& lotePrivado::getExpensas() const {
 string lotePrivado::getTipo() const{return "Privado";}
 
 double lotePrivado::getImporte(const Fecha& fecha) const {
-    // Implementa el cálculo del importe según tus necesidades
     return 0.0;
+}
+
+void lotePrivado::setVendido(bool vendido) {
+    this->vendido = vendido;
+}
+
+void lotePrivado::setPropietario(Persona* propietario) {
+    this->propietario = propietario;
+}
+
+void lotePrivado::PagarExpensa( Fecha& fechaExpensa) {
+    // Encuentra la expensa correspondiente a la fecha especificada
+    for (Expensa& expensa : expensas) {
+        if (
+        		(expensa.getFecha().getAnio() == fechaExpensa.getAnio())&&
+        		(expensa.getFecha().getMes() == fechaExpensa.getMes())&&
+				(expensa.getFecha().getDia() == fechaExpensa.getDia())
+				) {
+            // Realiza el pago de la expensa
+            expensa.Pagar();
+            return;  // Termina el bucle después de pagar la expensa
+        }
+    }
+
+    // Si llegamos aquí, no se encontró una expensa para esa fecha
+    cout << "Error: No se encontró una expensa para la fecha especificada." << endl;
 }

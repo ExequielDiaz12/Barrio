@@ -34,7 +34,12 @@ public:
 	double calcularConsumoComunitario(Fecha& fecha);
 	double recaudacion(Fecha& fecha);
 	double calcularTotalReservas(Fecha& fecha);
-	double calcularExpensaPrivada( Fecha& fecha);
+	double calcularExpensaPrivada( Fecha& fecha);//calcular diferencia
+	void venderLotePrivado(Persona& comprador, lotePrivado* lote);
+	double calculaRecaudacion( Fecha& fecha);
+	void agregarReservaLoteComunitario(int numLoteCom, Fecha& fecha, int horaInicio, int horaFin, double precioReserva, Persona* persona);
+	void PagarExpensaLotePrivado(int numLote, Fecha& fechaExpensa);
+
 };
 
 #endif /* ADMINISTRACION_H_ */

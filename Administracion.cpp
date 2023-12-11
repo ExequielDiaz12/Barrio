@@ -122,8 +122,59 @@ double Administracion::calcularExpensaPrivada( Fecha& fecha) {
     return (consumoComunitario - recaudacionReservas) / cantPrivadosOcupados;
 }
 
+void Administracion::venderLotePrivado(Persona& comprador, lotePrivado* lote) {
+    if (lote && !lote->estaVendido()) {
+        // Establecer el nuevo propietario
+        lote->setPropietario(&comprador);
 
+        // Marcar el lote como vendido
+        lote->setVendido(true);
 
+        // Agregar el lote al array de lotes del nuevo propietario
+        comprador.agregarLotePropietario(lote);
+    } else {
+        cout << "Error: El lote no está disponible para la venta." << endl;
+    }
+}
 
+double Administracion::calculaRecaudacion( Fecha& fecha) {
+    double totalRecaudado = 0.0;
+
+    for (LoteComunitario* lote : lotesComunitarios) {
+        totalRecaudado += lote->calcularRecaudacion(fecha);
+    }
+
+    return totalRecaudado;
+}
+
+void Administracion::agregarReservaLoteComunitario(int numLoteCom, Fecha& fecha, int horaInicio, int horaFin, double precioReserva, Persona* persona)
+{
+    // Buscar el LoteComunitario por su número
+    for (LoteComunitario* loteComunitario : lotesComunitarios)
+    {
+        if (loteComunitario->getNumero() == numLoteCom)
+        {
+            // Agregar la reserva al LoteComunitario encontrado
+            loteComunitario->agregarReserva(fecha, horaInicio, horaFin, precioReserva, persona);
+            return;  // Terminar el bucle después de encontrar el lote
+        }
+    }
+
+    cout << "Error: No se encontró el LoteComunitario con el número " << numLoteCom << endl;
+}
+
+void Administracion::PagarExpensaLotePrivado(int numLote, Fecha& fechaExpensa) {
+    // Busca el lote privado por su número
+    for (lotePrivado* lote : lotesPrivados) {
+        if (lote->getNumero() == numLote) {
+            // Paga la expensa del lote privado
+            lote->PagarExpensa(fechaExpensa);
+            return;  // Termina el bucle después de pagar la expensa
+        }
+    }
+
+    // Si llegamos aquí, no se encontró un lote privado con el número especificado
+    cout << "Error: No se encontró un lote privado con el número especificado." << endl;
+}
 
 
