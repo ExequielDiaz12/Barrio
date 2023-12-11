@@ -18,8 +18,8 @@ Administracion::~Administracion() {
 		 delete lote;
 	}
 }
-void Administracion::agregarLotePrivado(double area, bool vendido, Persona* propietario) {
-    lotePrivado* nuevo = new lotePrivado(area, vendido, propietario);
+void Administracion::agregarLotePrivado(double area, bool vendido) {
+    lotePrivado* nuevo = new lotePrivado(area, vendido);
     lotesPrivados.push_back(nuevo);
 }
 
@@ -46,18 +46,19 @@ double Administracion::calcularAreaTotalPrivado(){
 int Administracion::cantidadLotesPrivadosOcupados() {
     int cont = 0;
     for (const lotePrivado* lote : lotesPrivados) {
-        if (lote->estaVendido()) {
+        if (lote->getVendido()) {
             cont++;
         }
     }
     return cont;
 }
 
-float Administracion::calcularCostoContratacionesPorMes(int mes) {
+float Administracion::calcularCostoContratacionesPorMes(Fecha& fecha) {
     float total = 0.0;
 
     for (Contratacion* contratacion : contrataciones) {
-        if (contratacion->getFecha().getMes() == mes) {
+        if (contratacion->getFecha().getMes() == fecha.getMes() &&
+        		contratacion->getFecha().getAnio() == fecha.getAnio()) {
             total += contratacion->getCosto();
         }
     }
@@ -73,7 +74,7 @@ double Administracion::calcularConsumoComunitario(Fecha& fecha) {
 
     return total;
 }
-
+/*
 double Administracion::calcularTotalReservas( Fecha& fecha) {
     double total = 0.0;
 
@@ -107,35 +108,35 @@ double Administracion::recaudacion( Fecha& fecha)  {
 
     return totalRecaudado;
 }
-
+*/
 double Administracion::calcularExpensaPrivada( Fecha& fecha) {
     double consumoComunitario = calcularConsumoComunitario(fecha);
-    double totalReservas = calcularTotalReservas(fecha);
+    double totalReservas = calculaRecaudacion(fecha);
 
     if (consumoComunitario <= totalReservas) {
         return 0.0;
     }
 
-    double recaudacionReservas = recaudacion(fecha);
+    //double recaudacionReservas = recaudacion(fecha);
     int cantPrivadosOcupados = cantidadLotesPrivadosOcupados();
 
-    return (consumoComunitario - recaudacionReservas) / cantPrivadosOcupados;
+    return (consumoComunitario - totalReservas) / cantPrivadosOcupados;
 }
 
-void Administracion::venderLotePrivado(Persona& comprador, lotePrivado* lote) {
-    if (lote && !lote->estaVendido()) {
-        // Establecer el nuevo propietario
-        lote->setPropietario(&comprador);
+bool Administracion::venderLote(int numLote, Persona *comprador)
+	{
+		 bool vendido = false;
 
-        // Marcar el lote como vendido
-        lote->setVendido(true);
+		        for (auto& lote : lotesPrivados) {
+		   		    if (lote->getNumero() == numLote && !lote->getVendido()) {
+		                lote->VenderLote(comprador);
+		                vendido = true;
+		                break;
+		   		    }
+		        }
+		        return vendido;
+	}
 
-        // Agregar el lote al array de lotes del nuevo propietario
-        comprador.agregarLotePropietario(lote);
-    } else {
-        cout << "Error: El lote no está disponible para la venta." << endl;
-    }
-}
 
 double Administracion::calculaRecaudacion( Fecha& fecha) {
     double totalRecaudado = 0.0;
@@ -176,5 +177,27 @@ void Administracion::PagarExpensaLotePrivado(int numLote, Fecha& fechaExpensa) {
     // Si llegamos aquí, no se encontró un lote privado con el número especificado
     cout << "Error: No se encontró un lote privado con el número especificado." << endl;
 }
+
+void Administracion::CalcularExpensa(Fecha& fecha){
+	double areaTotal = calcularAreaTotalPrivado();
+	double servicios = calcularCostoContratacionesPorMes(fecha);
+	double consumoComunitario = calcularExpensaPrivada(fecha);
+
+	for (lotePrivado* lote : lotesPrivados) {
+	        if (lote->getVendido()) {
+	            lote->CrearExpensa(fecha, areaTotal, servicios, consumoComunitario);
+	        }
+	    }
+}
+
+void Administracion::emitirFactura(int numLote, Fecha& fechaExpensa)
+	{
+		for (auto& lote : lotesPrivados) {
+		            if (lote->getNumero() == numLote) {
+		                lote->EmitirFacturaExpensa(fechaExpensa);
+		                break;
+		            }
+		        }
+	}
 
 

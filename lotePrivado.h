@@ -18,21 +18,27 @@ using namespace std;
 class lotePrivado : public Lote{
 private:
 	bool vendido;
-	Persona* propietario;
-	vector<Expensa> expensas;
+	vector<Persona*> propietarios;
+	vector<Persona*> habitantes;
+	vector<Expensa*> expensas;
+	vector<Reserva*> reservas;
 public:
-	lotePrivado(double area, bool vendido, Persona* propietario);
+	lotePrivado(double area, bool vendido);
 	virtual ~lotePrivado();
 
-	bool estaVendido() const;
-	Persona* getPropietario() const;
-	void agregarExpensa(const Expensa& expensa);
-	const vector<Expensa>& getExpensas()const;
 	string getTipo() const override;
-	double getImporte(const Fecha& fecha) const override;
-	void setVendido(bool vendido);
-	void setPropietario(Persona* propietario);
-	void PagarExpensa( Fecha& fechaExpensa);
+	bool getVendido() const;
+
+	void AgregarReserva(Reserva *reserva);
+	double CalcularBonificacion(Fecha &fecha);
+	void CrearExpensa(Fecha &fecha, double areaTotal, double servicios, double consumoComunitario);
+	void EmitirFacturaExpensa(Fecha &fecha);
+	void PagarExpensa(Fecha &fecha);
+	void VenderLote(Persona *persona); // agrega una persona al propietarios
+	void AgregarHabitante (Persona * persona);
+	//Persona* getPropietario() const;
+//	void agregarExpensa(const Expensa& expensa);
+	//const vector<Expensa>& getExpensas()const;
 };
 
 #endif /* LOTEPRIVADO_H_ */

@@ -6,10 +6,8 @@
  */
 
 #include "lotePrivado.h"
-#include "Persona.h"
 
-lotePrivado::lotePrivado(double area, bool vendido, Persona* propietario)
-: Lote(area), vendido(vendido), propietario(propietario) {
+lotePrivado::lotePrivado(double area, bool vendido) : Lote(area), vendido(vendido) {
 	// TODO Auto-generated constructor stub
 
 }
@@ -18,50 +16,80 @@ lotePrivado::~lotePrivado() {
 	// TODO Auto-generated destructor stub
 }
 
-bool lotePrivado::estaVendido() const {
-    return vendido;
-}
+//bool lotePrivado::estaVendido() const {
+//    return vendido;
+//}
 
-Persona* lotePrivado::getPropietario() const {
-    return propietario;
-}
+//Persona* lotePrivado::getPropietario() const {
+//    return propietario;
+//}
 
-void lotePrivado::agregarExpensa(const Expensa& expensa) {
-    expensas.push_back(expensa);
-}
+//void lotePrivado::agregarExpensa(const Expensa& expensa) {
+//    expensas.push_back(expensa);
+//}
 
-const std::vector<Expensa>& lotePrivado::getExpensas() const {
-    return expensas;
-}
+//const std::vector<Expensa>& lotePrivado::getExpensas() const {
+//    return expensas;
+//}
 
 string lotePrivado::getTipo() const{return "Privado";}
 
-double lotePrivado::getImporte(const Fecha& fecha) const {
-    return 0.0;
+bool lotePrivado::getVendido() const{return vendido;}
+
+void lotePrivado::AgregarReserva(Reserva *reserva){
+	reservas.push_back(reserva);
 }
 
-void lotePrivado::setVendido(bool vendido) {
-    this->vendido = vendido;
+double lotePrivado::CalcularBonificacion(Fecha &fecha){
+	double total = 0;
+	for(const Reserva* reserva: reservas){
+		if(
+			(reserva->getFecha().getMes() == fecha.getMes()) &&
+			(reserva->getFecha().getAnio() == fecha.getAnio())
+		){
+			total += reserva->getPrecio();
+		}
+	}
+	return total * 0.05;
+}
+void lotePrivado::CrearExpensa(Fecha &fecha, double areaTotal, double servicios, double consumoComunitario){
+	double costoServicios = servicios * (area / areaTotal);
+	double consumoE = getImporte(fecha);
+	double bonificacion = CalcularBonificacion(fecha);
+	Expensa *nuevaExpensa = new Expensa(fecha,costoServicios,consumoE,consumoComunitario,bonificacion);
+	expensas.push_back(nuevaExpensa);
 }
 
-void lotePrivado::setPropietario(Persona* propietario) {
-    this->propietario = propietario;
+void lotePrivado::EmitirFacturaExpensa(Fecha &fecha){
+	for(Expensa* expensa: expensas){
+		if(
+			(expensa->getFecha().getMes() == fecha.getMes()) &&
+			(expensa->getFecha().getAnio() == fecha.getAnio())
+		){
+			expensa->emitirFactura();
+			break;
+		}
+	}
 }
 
-void lotePrivado::PagarExpensa( Fecha& fechaExpensa) {
-    // Encuentra la expensa correspondiente a la fecha especificada
-    for (Expensa& expensa : expensas) {
-        if (
-        		(expensa.getFecha().getAnio() == fechaExpensa.getAnio())&&
-        		(expensa.getFecha().getMes() == fechaExpensa.getMes())&&
-				(expensa.getFecha().getDia() == fechaExpensa.getDia())
-				) {
-            // Realiza el pago de la expensa
-            expensa.Pagar();
-            return;  // Termina el bucle después de pagar la expensa
-        }
-    }
+void lotePrivado::PagarExpensa(Fecha &fecha){
+	for( Expensa* expensa: expensas){
+		if(
+			(expensa->getFecha().getMes() == fecha.getMes()) &&
+			(expensa->getFecha().getAnio() == fecha.getAnio() && expensa->getPagado() == false)
+		){
+			expensa->pagarExpensa();
+			break;
+		}
+	}
+}
 
-    // Si llegamos aquí, no se encontró una expensa para esa fecha
-    cout << "Error: No se encontró una expensa para la fecha especificada." << endl;
+void lotePrivado::VenderLote(Persona *persona){
+	vendido = true;
+	propietarios.push_back(persona);
+	persona->agregarLotePropietario( this );
+}
+
+void lotePrivado::AgregarHabitante (Persona * persona){
+	habitantes.push_back(persona);
 }

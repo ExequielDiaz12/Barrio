@@ -24,11 +24,10 @@ private:
 public:
 	LoteComunitario(string nombreLote,double area, double precioBase);
 	virtual ~LoteComunitario();
-	double getImporte(const Fecha& fecha) const override;
 	string getTipo() const override;
 	string getNombreLote();
 	double getPrecioBase();
-	void agregarReserva( Fecha& fecha, int inicio, int fin, double precioReserva, Persona* persona);
+	void agregarReserva( Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona);//realizar reserva
 	const vector<Reserva*>& getReservas() const;
 	double calcularRecaudacion(Fecha& fecha);
 

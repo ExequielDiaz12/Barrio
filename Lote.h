@@ -26,7 +26,7 @@ public:
 	void agregarConsumo(double importe, const Fecha& fecha);
 	int getNumero()const;
 	double getArea()const;
-	virtual double getImporte(const Fecha& fecha) const = 0;
+	double getImporte(const Fecha& fecha) const;
 	virtual string getTipo() const = 0;
 
 };

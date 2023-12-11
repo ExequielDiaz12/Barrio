@@ -19,32 +19,32 @@ using namespace std;
 
 int main() {
 
+		Fecha f1(1,1,2023);
+	    Fecha fechaExpensa(2023, 12, 1);
 	    Administracion administracion("Barrio XYZ");
-
 
 	    LoteComunitario* loteComunitario = new LoteComunitario("Área de recreación", 500.0, 100.0);
 	    administracion.agregarLoteComunitario("Área de recreación", 500.0, 100.0);
 
 
-	    lotePrivado* miLotePrivado = new lotePrivado(300.0, false, nullptr);
-	    administracion.agregarLotePrivado(300.0, false, nullptr);
+	    lotePrivado* miLotePrivado = new lotePrivado(300.0, false);
+	    administracion.agregarLotePrivado(300.0, false);
 
 
+	    miLotePrivado->agregarConsumo(123.6, fechaExpensa);
 	    Persona persona("123456789", "Juan Perez");
 
-
-	   administracion.venderLotePrivado(persona, miLotePrivado);
+	    administracion.venderLote(1, &persona);
 
 
 	    Fecha fechaReserva(2023, 12, 15);
 	    loteComunitario->agregarReserva(fechaReserva, 14, 16, 50.0,&persona);
 
 
-	    Fecha fechaExpensa(2023, 12, 1);
-	    double expensaPrivada = administracion.calcularExpensaPrivada(fechaExpensa);
 
+	    administracion.CalcularExpensa(fechaExpensa);
 
-	    cout << "Expensa privada para diciembre de 2023: $" << expensaPrivada << endl;
+	    administracion.emitirFactura(1, fechaExpensa);
 
 
 	    delete loteComunitario;

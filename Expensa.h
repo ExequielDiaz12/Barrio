@@ -22,13 +22,17 @@ private:
 	double interesesGenerados;
     double bonificacion;
     double total;
+	void setFechaVencimiento();
+
+	double calcularIntereses();
 public:
-	Expensa(const Fecha& fecha, const Fecha& fechaVencimiento, bool pagado,
-            double costoServicio, double consumoElectrico, double consumoElectricoComunitario,
-            double interesesGenerados, double bonificacion);
-	virtual ~Expensa();
+	Expensa(const Fecha& fecha,double costoServicio, double consumoElectrico, double consumoElectricoComunitario,
+            double bonificacion);
 	Fecha getFecha();
-	void Pagar();
+	void emitirFactura();
+	virtual ~Expensa();
+	bool getPagado();
+	void pagarExpensa();
 };
 
 #endif /* EXPENSA_H_ */

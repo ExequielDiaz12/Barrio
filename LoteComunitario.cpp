@@ -21,7 +21,7 @@ LoteComunitario::~LoteComunitario() {
 }
 
 string LoteComunitario::getNombreLote(){return nombreLote;}
-
+/*
 double LoteComunitario::getImporte (const Fecha& fecha) const {
 	double totalImporte = 0.0;
 	for(const Consumo* consumo: consumos){
@@ -34,7 +34,7 @@ double LoteComunitario::getImporte (const Fecha& fecha) const {
 	}
 	return totalImporte;
 }
-
+*/
 double LoteComunitario::calcularRecaudacion(Fecha& fecha){
 	double totalRecaudacion = 0.0;
 	for(const Reserva* reserva: reservas){

@@ -24,22 +24,23 @@ private:
 public:
 	Administracion(string nombre);
 	void agregarLoteComunitario(string nombreLote,double area, double precioBase);
-	void agregarLotePrivado(double area, bool vendido, Persona* propietario);
+	void agregarLotePrivado(double area, bool vendido);
 	void agregarContratacion(string empresa,Fecha &fecha,float costo,string tipoServicio);
 	virtual ~Administracion();
 
 	double calcularAreaTotalPrivado();
 	int cantidadLotesPrivadosOcupados();
-	float calcularCostoContratacionesPorMes(int mes);
-	double calcularConsumoComunitario(Fecha& fecha);
-	double recaudacion(Fecha& fecha);
-	double calcularTotalReservas(Fecha& fecha);
+	float calcularCostoContratacionesPorMes(Fecha& fecha);
+	double calcularConsumoComunitario(Fecha& fecha);//lectr
+	//double recaudacion(Fecha& fecha);//ver
+	//double calcularTotalReservas(Fecha& fecha);//ver
 	double calcularExpensaPrivada( Fecha& fecha);//calcular diferencia
-	void venderLotePrivado(Persona& comprador, lotePrivado* lote);
-	double calculaRecaudacion( Fecha& fecha);
+	bool venderLote(int numLote, Persona *comprador);
+	double calculaRecaudacion( Fecha& fecha);//calcular recaudacion comunitario
 	void agregarReservaLoteComunitario(int numLoteCom, Fecha& fecha, int horaInicio, int horaFin, double precioReserva, Persona* persona);
 	void PagarExpensaLotePrivado(int numLote, Fecha& fechaExpensa);
-
+	void CalcularExpensa(Fecha& fecha);
+	void emitirFactura(int numLote, Fecha& fechaExpensa);
 };
 
 #endif /* ADMINISTRACION_H_ */
