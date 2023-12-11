@@ -14,6 +14,7 @@ Expensa::Expensa(const Fecha& fecha, double costoServicio, double consumoElectri
 	this->setFechaVencimiento();
 	this->pagado = false;
     this->total = costoServicio + consumoElectrico + consumoElectricoComunitario - bonificacion;
+	this->interesesGenerados = 0;
 }
 
 
@@ -49,7 +50,7 @@ double Expensa::calcularIntereses(){
 		int totalMeses = cantAnios*12 - cantMeses;
 
 		if(totalMeses>0 || (totalMeses==0 && cantDias > 0)){
-			return (totalMeses* 0.5) + this->total;
+			return (totalMeses* 0.5) * this->total;
 		}
 	}
 	return 0;
@@ -59,6 +60,7 @@ void Expensa::emitirFactura(){
 	cout << "Fecha de Vencimiento: " << fechaVencimiento << endl;
 	cout << "Costo de servicios: " << costoServicio << endl;
 	cout << "Consumo Electrico: " << consumoElectrico << endl;
+	if(!pagado){interesesGenerados= calcularIntereses();}
 	cout << "Intereses Generados: " << interesesGenerados << endl;
 	cout << "Bonificacion: " << bonificacion << endl;
 }
