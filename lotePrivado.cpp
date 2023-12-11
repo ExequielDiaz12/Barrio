@@ -58,28 +58,27 @@ void lotePrivado::CrearExpensa(Fecha &fecha, double areaTotal, double servicios,
 	double bonificacion = CalcularBonificacion(fecha);
 	Expensa *nuevaExpensa = new Expensa(fecha,costoServicios,consumoE,consumoComunitario,bonificacion);
 	expensas.push_back(nuevaExpensa);
-	nuevaExpensa->SetTotal();
 }
 
 void lotePrivado::EmitirFacturaExpensa(Fecha &fecha){
-	for(const Expensa* expensa: expensas){
+	for(Expensa* expensa: expensas){
 		if(
 			(expensa->getFecha().getMes() == fecha.getMes()) &&
 			(expensa->getFecha().getAnio() == fecha.getAnio())
 		){
-			expensa->EmitirFactura();
+			expensa->emitirFactura();
 			break;
 		}
 	}
 }
 
 void lotePrivado::PagarExpensa(Fecha &fecha){
-	for(const Expensa* expensa: expensas){
+	for( Expensa* expensa: expensas){
 		if(
 			(expensa->getFecha().getMes() == fecha.getMes()) &&
 			(expensa->getFecha().getAnio() == fecha.getAnio() && expensa->getPagado() == false)
 		){
-			expensa->PagarExpensa();
+			expensa->pagarExpensa();
 			break;
 		}
 	}

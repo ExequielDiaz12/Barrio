@@ -22,8 +22,12 @@ const string& Persona::getDni() const {return dni;}
 
 const string& Persona::getNombre() const {return nombre;}
 
+lotePrivado* Persona::getLote(){return loteHabita;}
 
 void Persona::agregarLotePropietario(lotePrivado* lote) {
     lotes.push_back(lote);
 }
 
+void Persona::agregarLoteHabita(lotePrivado* lote) {
+    loteHabita = lote;
+}

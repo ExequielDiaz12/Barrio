@@ -15,6 +15,8 @@ using namespace std;
 #include "Reserva.h"
 #include <vector>
 
+class lotePrivado;
+
 class LoteComunitario : public Lote {
 private:
 	string nombreLote;
@@ -27,7 +29,8 @@ public:
 	string getTipo() const override;
 	string getNombreLote();
 	double getPrecioBase();
-	void agregarReserva( Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona);//realizar reserva
+	bool ComprobarReserva(Fecha& fecha, const int inicio, const int fin, Persona* persona);
+	void agregarReserva( Fecha& fecha, const int inicio, const int fin, Persona* persona);//realizar reserva
 	const vector<Reserva*>& getReservas() const;
 	double calcularRecaudacion(Fecha& fecha);
 

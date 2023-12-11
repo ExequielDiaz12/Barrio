@@ -34,7 +34,7 @@ public:
 	void CrearExpensa(Fecha &fecha, double areaTotal, double servicios, double consumoComunitario);
 	void EmitirFacturaExpensa(Fecha &fecha);
 	void PagarExpensa(Fecha &fecha);
-	void VenderLote( Persona *persona); // agrega una persona al propietarios
+	void VenderLote(Persona *persona); // agrega una persona al propietarios
 	void AgregarHabitante (Persona * persona);
 	//Persona* getPropietario() const;
 //	void agregarExpensa(const Expensa& expensa);

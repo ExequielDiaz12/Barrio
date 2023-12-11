@@ -21,7 +21,20 @@ LoteComunitario::~LoteComunitario() {
 }
 
 string LoteComunitario::getNombreLote(){return nombreLote;}
-
+/*
+double LoteComunitario::getImporte (const Fecha& fecha) const {
+	double totalImporte = 0.0;
+	for(const Consumo* consumo: consumos){
+		if(
+				(consumo->getFecha().getMes() == fecha.getMes()) &&
+				(consumo->getFecha().getAnio() == fecha.getAnio())
+		){
+			totalImporte += consumo->getImporte();
+		}
+	}
+	return totalImporte;
+}
+*/
 double LoteComunitario::calcularRecaudacion(Fecha& fecha){
 	double totalRecaudacion = 0.0;
 	for(const Reserva* reserva: reservas){
@@ -51,15 +64,38 @@ bool LoteComunitario::estaReservado( Fecha& fecha){
 	return true;
 }
 
-void LoteComunitario::agregarReserva(Fecha& fecha, const int inicio, const int fin, double precioReserva, Persona* persona){
-	if(estaReservado(fecha))
-	{
-		Reserva* nuevaReserva = new Reserva(fecha, inicio, fin, precioReserva, this, persona);
-		reservas.push_back(nuevaReserva);
-	}else{
-		cout<<"No se pudo hacer reverda"<<endl;
-	}
 
+bool LoteComunitario::ComprobarReserva(Fecha& fecha, const int inicio, const int fin, Persona* persona){
+	bool seReservo = true;
+	Fecha fechaActual;
+	if(fecha >= fechaActual){
+		vector<Reserva*>::iterator it;
+		it = reservas.begin();
+		while(it!=reservas.end() && seReservo)
+		{
+			if((*it)->EstaReservado(fecha,inicio,fin)){
+				seReservo = false;
+			}
+			++it;
+		}
+
+		if(seReservo)
+		{
+			agregarReserva(fecha,inicio,fin,persona);
+			return true;
+		}else{
+			return false;
+		}
+	}else{
+		return true;
+	}
+}
+
+void LoteComunitario::agregarReserva(Fecha& fecha,  int inicio,  int fin, Persona* persona){
+	double precioReserva = (inicio-fin) * precioBase;
+	Reserva *nuevaReserva = new Reserva(fecha, inicio, fin, precioReserva, this, persona);
+	persona->getLote()->AgregarReserva(nuevaReserva);
+	reservas.push_back(nuevaReserva);
 }
 
 string LoteComunitario::getTipo() const{return "Comunitario";}

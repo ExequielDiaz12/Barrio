@@ -8,9 +8,10 @@
 #ifndef RESERVA_H_
 #define RESERVA_H_
 #include "Fecha.h"
+#include "Persona.h"
 
 class LoteComunitario;
-class Persona;
+//class Persona;
 
 class Reserva {
 private:
@@ -28,6 +29,7 @@ public:
 	Fecha getFecha() const;
 	LoteComunitario* getLoteComunitario() const;
 	Persona* getPersona() const;
+	bool EstaReservado(Fecha& fecha, int horaInicio, int horaFin);
 };
 
 #endif /* RESERVA_H_ */

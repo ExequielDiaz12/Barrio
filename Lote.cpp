@@ -7,7 +7,7 @@
 
 #include "Lote.h"
 
-int Lote::lotesCreados = 0;
+int Lote::lotesCreados = 1;
 
 Lote::Lote(double area) : numero(lotesCreados++), area(area) {
 

@@ -23,3 +23,19 @@ LoteComunitario* Reserva::getLoteComunitario() const{
 Persona* Reserva::getPersona() const{
 	return persona;
 }
+
+bool Reserva::EstaReservado(Fecha& fecha, int horaInicio, int horaFin){
+	if(fecha.getAnio() == this->fecha.getAnio() && fecha.getMes() == this->fecha.getMes() && fecha.getDia() == this->fecha.getDia())
+	{
+		if((horaInicio > this->horaInicio && horaFin <= this->horaFin) || (horaInicio < this->horaInicio && horaFin > this->horaFin))
+		{
+			return true;
+		}
+		else{
+			return false;
+		}
+
+	}else{
+		return false;
+	}
+}

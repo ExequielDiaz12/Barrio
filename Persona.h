@@ -19,13 +19,16 @@ private:
 	string dni;
 	string nombre;
 	vector<lotePrivado*> lotes;
+	lotePrivado *loteHabita;
 	//falta el lote en el que habita y una funcion para agregar este puntero
 public:
 	Persona(string dni, string nombre);
 	virtual ~Persona();
 	const string& getDni() const;
 	const string& getNombre() const;
+	lotePrivado* getLote();
 	void agregarLotePropietario(lotePrivado* lote);
+	void agregarLoteHabita(lotePrivado* lote);
 };
 
 #endif /* PERSONA_H_ */
